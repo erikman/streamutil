@@ -2,6 +2,7 @@
   "name": "streamutil",
   "version": "1.0.0",
   "description": "Helpers for combining streams and promises",
+  "homepage": "https://github.com/erikman/streamutil",
   "main": "dist/index.js",
   "directories": {
     "test": "test"
@@ -13,10 +14,15 @@
     "prepublish": "npm run build"
   },
   "keywords": [
-    "stream"
+    "stream",
+    "promise"
   ],
-  "author": "Erik Man",
+  "author": {
+    "name": "Erik Man",
+    "email": "goodbyte100@yahoo.com"
+  },
   "license": "MIT",
+  "repository": "erikman/streamutil",
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
