@@ -1,6 +1,6 @@
 {
   "name": "streamutil",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Helpers for combining streams and promises",
   "homepage": "https://github.com/erikman/streamutil",
   "main": "dist/index.js",
