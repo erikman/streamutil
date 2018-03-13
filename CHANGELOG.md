@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- Removed some console.error printouts
+
 ## [1.1.1] - 2018-03-13
 ### Changed
 - Bugfix, filter and transform was not exported properly
