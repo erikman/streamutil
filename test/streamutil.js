@@ -790,6 +790,36 @@ describe('streamutil', () => {
     });
   });
 
+  describe('transform', () => {
+    it('can transform elements in a stream', () => {
+      let mapStream = streamutil.pipeline([
+        streamutil.arrayToStream([2, 3, 4, 5]),
+        streamutil.transform((push, x) => {
+          push(x + 1);
+          push(x * x);
+        })
+      ]);
+
+      return assert.eventually.deepEqual(
+        streamutil.streamToArray(mapStream),
+        [3, 4, 4, 9, 5, 16, 6, 25]);
+    });
+
+    it('can have promises as return values', () => {
+      let mapStream = streamutil.pipeline([
+        streamutil.arrayToStream([2, 3, 4, 5]),
+        streamutil.transform((push, x) => Promise.delay(20).then(() => {
+          push(x + 1);
+          push(x * x);
+        }))
+      ]);
+
+      return assert.eventually.deepEqual(
+        streamutil.streamToArray(mapStream),
+        [3, 4, 4, 9, 5, 16, 6, 25]);
+    });
+  });
+
   describe('map', () => {
     it('can transform elements in a stream', () => {
       let mapStream = streamutil.pipeline([
@@ -811,6 +841,30 @@ describe('streamutil', () => {
       return assert.eventually.deepEqual(
         streamutil.streamToArray(mapStream),
         [4, 9, 16, 25]);
+    });
+  });
+
+  describe('filter', () => {
+    it('can remove elements from a stream', () => {
+      let mapStream = streamutil.pipeline([
+        streamutil.arrayToStream([2, 3, 4, 5]),
+        streamutil.filter(x => x % 2 == 0)
+      ]);
+
+      return assert.eventually.deepEqual(
+        streamutil.streamToArray(mapStream),
+        [2, 4]);
+    });
+
+    it('can have promises as return values', () => {
+      let mapStream = streamutil.pipeline([
+        streamutil.arrayToStream([2, 3, 4, 5]),
+        streamutil.filter(x => Promise.delay(20).then(() => x % 2 == 0))
+      ]);
+
+      return assert.eventually.deepEqual(
+        streamutil.streamToArray(mapStream),
+        [2, 4]);
     });
   });
 
